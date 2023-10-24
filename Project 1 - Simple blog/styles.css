@@ -1,0 +1,19 @@
+/* /* body {
+    background-color: #333;
+    color: #646669;
+    /* color: white; */
+/*}
+
+h1 {
+    font-weight: bold;
+}  */
+
+* {
+    /* padding:0px; */
+    /* margin:0px; */
+    border:0px;
+}
+
+.main-title {
+    /* border: 2px solid red; */
+}
