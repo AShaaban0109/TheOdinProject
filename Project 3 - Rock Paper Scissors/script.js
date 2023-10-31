@@ -54,28 +54,85 @@ function playRound(playerSelection, computerSelection) {
     return result
 }
 
+function checkGameOver(playedRounds, totalRounds, playerScore, computerScore) {
+    if (playedRounds == totalRounds) {
+        let result = ""
+        const body = document.querySelector("body")
+        gameOverDiv = document.createElement("div")
+        buttons = document.querySelectorAll("button")
+        body.append(gameOverDiv)
+        if (playerScore>computerScore) {
+            result = `You win! ${playerScore} - ${computerScore}`
+        } else if (playerScore<computerScore) {
+            result = `You Lose :(. ${playerScore} - ${computerScore}`
+        } else {
+            result = `Draw! ${playerScore} - ${computerScore}`
+        }
+        buttons.forEach(button => {
+            button.disabled = true
+        });
+        gameOverDiv.textContent = result
+    }
+}
+
 function game(rounds = 5) {
+    const body = document.querySelector("body")
+    const rockButton = document.querySelector("#rock")
+    const paperButton = document.querySelector("#paper")
+    const scissorsButton = document.querySelector("#scissors")
+
     let playerScore = 0
     let computerScore = 0
-    for (let i = 0; i < rounds; i++) {
-        const playerSelection = prompt("Pick out of rock, paper and scissors:")
+    let playedRounds = 0
+
+    rockButton.addEventListener('click', function () {
         const computerSelection = getComputerChoice()
-        let outcome = playRound(playerSelection, computerSelection)
-        console.log(outcome);
+        let outcome = playRound('rock', computerSelection)
+        let outcomeDiv = document.createElement("div")
+        outcomeDiv.textContent = outcome
+        body.append(outcomeDiv)
+
+        playedRounds++
         if (outcome.includes("Win")) {
             playerScore++
         } else if (outcome.includes("Lose")) {
             computerScore++
         }
-    }
+        checkGameOver(playedRounds, rounds, playerScore, computerScore)
+    })
 
-    if (playerScore>computerScore) {
-        console.log(`You win! ${playerScore} - ${computerScore}`);
-    } else if (playerScore<computerScore) {
-        console.log(`You Lose :(. ${playerScore} - ${computerScore}`);
-    } else {
-        console.log(`Draw! ${playerScore} - ${computerScore}`);
-    }
+    paperButton.addEventListener('click', function () {
+        const computerSelection = getComputerChoice()
+        let outcome = playRound('paper', computerSelection)
+        let outcomeDiv = document.createElement("div")
+        outcomeDiv.textContent = outcome
+        body.append(outcomeDiv)
+
+        playedRounds++
+        if (outcome.includes("Win")) {
+            playerScore++
+        } else if (outcome.includes("Lose")) {
+            computerScore++
+        }
+        checkGameOver(playedRounds, rounds, playerScore, computerScore)
+    })
+
+    scissorsButton.addEventListener('click', function () {
+        const computerSelection = getComputerChoice()
+        let outcome = playRound('scissors', computerSelection)
+        let outcomeDiv = document.createElement("div")
+        outcomeDiv.textContent = outcome
+        body.append(outcomeDiv)
+
+        playedRounds++
+        if (outcome.includes("Win")) {
+            playerScore++
+        } else if (outcome.includes("Lose")) {
+            computerScore++
+        }
+        checkGameOver(playedRounds, rounds, playerScore, computerScore)
+    })
+
 }
 
-game()
+game(5) 
