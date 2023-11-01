@@ -1,6 +1,7 @@
 
 function createBoard(rows, cols){
     const board = document.querySelector(".board")
+    removeBoard()  // used if needed after the first iteration
     for (let i = 0; i < rows; i++) {
         const row = document.createElement("div")
         row.classList.add("row");
@@ -36,14 +37,23 @@ function setDrawingColour(mouseover, mouseleave) {
 
         square.addEventListener('mouseleave', function(){
             square.style.backgroundColor = mouseleave
-            // square.style.backgroundColor = document.body.style.backgroundColor
         })
     });
-
 }
 
-createBoard(16, 16)
-setDrawingColour("blue", "white")
+// edit this so it actually is random. Don't really feel like it.
+function setRandomDrawingColour() {
+    squares = document.querySelectorAll(".square")
+    squares.forEach(square => {
+        square.addEventListener('mouseover', function(){
+            square.style.backgroundColor = "red"
+        })
+
+        square.addEventListener('mouseleave', function(){
+            square.style.backgroundColor = "yellow"
+        })
+    });
+}
 
 const reset = document.querySelector(".reset-button")
 reset.addEventListener('click', resetBoard)
@@ -52,8 +62,18 @@ const gridSize = document.querySelector(".create-new-grid-button")
 gridSize.addEventListener('click', function () {
     const inputSize = Number(document.querySelector(".grid-size-input").value)
     if (typeof inputSize == 'number' && !isNaN(inputSize) && inputSize <100) {
-        removeBoard()
         createBoard(inputSize, inputSize)
-        setDrawingColour("blue", "white")
+
+        // do some checks here, if randomise button is active etc. and change this otherwise.
+        // don't really feel like it tbh
+        setDrawingColour(mouseoverColour,mouseleaveColour)
     }
 })
+
+const randomizeColours = document.querySelector(".randomize-colours-button")
+randomizeColours.addEventListener('click', setRandomDrawingColour)
+
+
+mouseoverColour = "blue", mouseleaveColour = "white"
+createBoard(16, 16)
+setDrawingColour(mouseoverColour,mouseleaveColour)
