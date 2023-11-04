@@ -43,8 +43,12 @@
 // console.log(characters);
 // console.log(lengths)
 
-let arr = [ 1, 2, 15];
+// let arr = [ 1, 2, 15];
 
-arr.sort(function(a, b) { return a- b; });
+// arr.sort(function(a, b) { return a- b; });
 
-console.log(arr);  // 1, 2, 15
+// console.log(arr);  // 1, 2, 15
+
+let imSoConfused = {} + {hi:1,}
+console.log(imSoConfused);
+console.log(typeof(imSoConfused));
